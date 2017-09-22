@@ -12,6 +12,7 @@
     <modules>
         <module>sample-cloud-eureka</module>
         <module>sample-cloud-paperinfo</module>
+        <module>sample-cloud-ribbon</module>
     </modules>
 
     <properties>
