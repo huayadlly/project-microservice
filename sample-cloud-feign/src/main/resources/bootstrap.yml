@@ -1,0 +1,9 @@
+spring.application.name: sample-cloud-feign
+server.port: 8093
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8090/eureka/

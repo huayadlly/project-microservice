@@ -13,6 +13,7 @@
         <module>sample-cloud-eureka</module>
         <module>sample-cloud-paperinfo</module>
         <module>sample-cloud-ribbon</module>
+        <module>sample-cloud-feign</module>
     </modules>
 
     <properties>
