@@ -1,9 +1,11 @@
 package cn.taike.paperinfo.web;
 
+import cn.taike.paperinfo.service.PaperService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,13 +21,22 @@ public class PaperController {
     @Autowired
     private DiscoveryClient client;
 
-    @RequestMapping(value = "/paper/add", method = RequestMethod.GET)
-    public Object addPaperInfo(@RequestParam(value = "num") Integer number1,
-                               @RequestParam(value = "num2") Integer number2) {
+    @Autowired
+    private PaperService paperService;
 
-        ServiceInstance localServiceInstance = client.getLocalServiceInstance();
-        Integer result = number1 + number2;
-        log.info("/paper/add,host:[{}],port:[{}],result:[{}]", localServiceInstance.getHost(), localServiceInstance.getPort(), result);
-        return result;
+    @RequestMapping(value = "/paper/add", method = RequestMethod.GET)
+    public Object addPaperInfo(@RequestParam(value = "a") Integer number1,
+                               @RequestParam(value = "b") Integer number2) {
+        try {
+            ServiceInstance localServiceInstance = client.getLocalServiceInstance();
+            Integer result = paperService.addSum(number1, number2);
+            log.info("/paper/add success,host:[{}],port:[{}],result:[{}]", localServiceInstance.getHost(), localServiceInstance.getPort(), result);
+            return result;
+
+        } catch (Exception e) {
+            log.error("paperInfo, number count error.", e);
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 }

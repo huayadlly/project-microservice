@@ -20,14 +20,14 @@ public class RibbonConsumerController {
     @Autowired
     private RibbonConsumerService ribbonConsumerService;
 
-    @RequestMapping(value = "/ribbon/consumer", method = RequestMethod.GET)
+    @RequestMapping(value = "/ribbon/add", method = RequestMethod.GET)
     public Object ribbonConsumer(@RequestParam(value = "a") String integer1,
                                  @RequestParam(value = "b") String integer2) throws JsonProcessingException {
         try {
             String responseBody = ribbonConsumerService.consumerAddService(integer1, integer2);
             log.info("ribbon,result:[{}]", responseBody);
-
             return responseBody;
+
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();

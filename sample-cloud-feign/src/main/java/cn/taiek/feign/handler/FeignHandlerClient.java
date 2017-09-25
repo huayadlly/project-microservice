@@ -1,4 +1,4 @@
-package cn.taiek.feign.feign;
+package cn.taiek.feign.handler;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 3.Feign中已经引入了Hystix，Feign中已经有hystix的依赖，所以在feign中使用hystix的时候不需要再引入其他的依赖包；
  * </p>
  */
-@FeignClient(value = "SAMPLE-CLOUD-PAPERINFO", fallback = FeignHandlerClientHystrix.class)
+@FeignClient(value = "SAMPLE-CLOUD-PAPERINFO", fallback = FeignHandlerClientImpl.class)
 public interface FeignHandlerClient {
 
     @RequestMapping(value = "/paper/add", method = RequestMethod.GET)
-    Integer addPaperInfo(@RequestParam(value = "num") Integer number1, @RequestParam(value = "num2") Integer number2);
+    Integer addPaperInfo(@RequestParam(value = "a") Integer number1, @RequestParam(value = "b") Integer number2);
 }

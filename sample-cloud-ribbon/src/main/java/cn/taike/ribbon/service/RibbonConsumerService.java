@@ -1,5 +1,6 @@
 package cn.taike.ribbon.service;
 
+import cn.taike.ribbon.handler.PaperCountHandler;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -13,29 +14,13 @@ import org.springframework.web.client.RestTemplate;
 public class RibbonConsumerService {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private PaperCountHandler paperCountHandler;
 
     // 业务逻辑
     @HystrixCommand(fallbackMethod = "consumerAddServiceFallback")
     public String consumerAddService(String integer1, String integer2) {
 
-        // body -- GET请求
-        // String body = mapper.writeValueAsString(new RequestBody(integer1, integer2));
-        // header
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        // request
-        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
-        // response
-        ResponseEntity<String> response = restTemplate.exchange(
-                "http://SAMPLE-CLOUD-PAPERINFO/paper/add?num={integer1}&num2={integer2}",
-                HttpMethod.GET,
-                requestEntity,
-                String.class,
-                integer1,
-                integer2
-        );
-        return response.getBody();
+        return paperCountHandler.ribbonPaperAdd(integer1, integer2);
     }
 
     /**
@@ -47,6 +32,6 @@ public class RibbonConsumerService {
      * @return
      */
     public String consumerAddServiceFallback(String integer1, String integer2) {
-        return "error, params:[" + integer1 + "], [" + integer2 + "]";
+        return "Ribbon Fallback Error, params:[" + integer1 + "], [" + integer2 + "]";
     }
 }

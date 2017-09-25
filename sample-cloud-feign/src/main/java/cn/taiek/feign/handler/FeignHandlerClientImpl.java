@@ -1,4 +1,4 @@
-package cn.taiek.feign.feign;
+package cn.taiek.feign.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class FeignHandlerClientHystrix implements FeignHandlerClient {
+public class FeignHandlerClientImpl implements FeignHandlerClient {
 
     @Override
     public Integer addPaperInfo(Integer number1, Integer number2) {
