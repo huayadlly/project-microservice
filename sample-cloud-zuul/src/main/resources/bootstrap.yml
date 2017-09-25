@@ -1,0 +1,21 @@
+spring.application.name: sample-cloud-zuul
+server.port: 8095
+
+zuul:
+  routes:
+    sample-cloud-paper:
+      path: /sample-cloud-paper/**
+      serviceId: sample-cloud-paperinfo
+    sample-cloud-ribbon:
+      path: /sample-cloud-ribbon/**
+      serviceId: sample-cloud-ribbon
+    sample-cloud-feign:
+      path: /sample-cloud-feign/**
+      serviceId: sample-cloud-feign
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8090/eureka/

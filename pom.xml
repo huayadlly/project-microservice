@@ -14,6 +14,7 @@
         <module>sample-cloud-paperinfo</module>
         <module>sample-cloud-ribbon</module>
         <module>sample-cloud-feign</module>
+        <module>sample-cloud-zuul</module>
     </modules>
 
     <properties>
