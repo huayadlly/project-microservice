@@ -26,7 +26,7 @@ public class PaperCountHandler {
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
         // response
         ResponseEntity<String> response = restTemplate.exchange(
-                "http://SAMPLE-CLOUD-PAPERINFO/paper/add?num={integer1}&num2={integer2}",
+                "http://SAMPLE-CLOUD-PAPERINFO/paper/add?a={num1}&b={num2}",
                 HttpMethod.GET,
                 requestEntity,
                 String.class,
